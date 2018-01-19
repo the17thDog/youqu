@@ -1,37 +1,36 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <button @click="haha">123</button>
-  </div>
+	<div class="hello">
+		<login></login>
+		<!-- <button @click="haha">123</button> -->
+	</div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        msg: 'yes'
-      }
-    },
-    methods: {
-      haha() {
-        this.$http.get('/api/a.txt')
-          .then(res => {
-            console.log(res);
+import Login from './pages/Login'
 
-          })
-          .catch(e => {
-            console.log(e);
-          })
-      }
-    }
-  }
-
+export default {
+	data() {
+		return {
+		msg: 'yes'
+		}
+	},
+	methods: {
+		// haha() {
+		//   this.$http.get('/api/a.txt')
+		//     .then(res => {
+		//       console.log(res);
+		//     })
+		//     .catch(e => {
+		//       console.log(e);
+		//     })
+		// }
+	},
+	components: {
+		login: Login
+	}
+}
 </script>
 
-<style scoped>
-  h1,
-  h2 {
-    font-weight: normal;
-  }
-
+<style lang="less">
+@import url('./styles/base');
 </style>
