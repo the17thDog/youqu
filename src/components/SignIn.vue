@@ -1,5 +1,6 @@
 <template lang="pug">
     .login-content
+        .login-tips 登录
         form(method='post' accept-charset="UTF-8")
             input(type='text' name='username' placeholder='请输入' class='username')
             input(type='password' name='password' placeholder='请输入' class='password')
@@ -30,16 +31,23 @@ export default {
 <style lang="less" scoped>
     input {
         display: block;
-        height: 40px;
+        height: 30px;
         width: 90%;
-        margin: 40px auto;
-        border-bottom: 1px solid #eee;
+        padding-left: 10px;
+        border-radius: 2px;
+        margin: 20px auto;
+        border: 1px solid rgba(0, 0, 0, .2);
     }
     .login-content {
-        padding-top: 30px;
         height: 310px;
-        width: 300px;
-        margin: 10px auto;
+        width: 280px;
+        margin: 20px auto;
+        padding: 10px 0;
+        .login-tips {
+            text-align: left;
+            font-size: 22px;
+            font-weight: 500;
+        }
     }
 </style>
 
