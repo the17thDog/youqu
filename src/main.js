@@ -7,10 +7,14 @@ import router from "./router";
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+// Object.assign(Vue.prototype, {
+//     $http: axios,
+//     $isLogin: false
+// })
 
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: { App }
 })

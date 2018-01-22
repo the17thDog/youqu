@@ -1,17 +1,16 @@
-<template>
-	<div class="hello">
-		<login></login>
-		<!-- <button @click="haha">123</button> -->
-	</div>
+<template lang='pug'>
+	home(v-if='this.$route.path =="/home"')
+	login(v-else)
 </template>
 
 <script>
 import Login from './pages/Login'
+import Home from './pages/Home'
 
 export default {
 	data() {
 		return {
-		msg: 'yes'
+			// siLogin
 		}
 	},
 	methods: {
@@ -26,7 +25,11 @@ export default {
 		// }
 	},
 	components: {
-		login: Login
+		login: Login,
+		home: Home
+	},
+	mounted () {
+		
 	}
 }
 </script>
