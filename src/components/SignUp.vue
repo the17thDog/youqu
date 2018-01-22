@@ -1,5 +1,9 @@
 <template lang="pug">
-    div 123
+    .register-content
+        form(method='post' accept-charset="UTF-8")
+            input.sign-up-username(type='text' name='username' placeholder='请输入')
+            input.sign-up-password(type='password' name='password' placeholder='请输入')
+            input.sign-up-submit(type='submit' value='注册')
 </template>
 
 <script>
