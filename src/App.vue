@@ -1,6 +1,5 @@
 <template lang='pug'>
-	home(v-if='this.$route.path =="/home"')
-	login(v-else)
+	router-view
 </template>
 
 <script>
