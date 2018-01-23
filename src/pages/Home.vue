@@ -1,22 +1,18 @@
 <template lang="pug">
     .home-container
-        header
-            .header-inner
-                .logo
-                .searchBar
-                .userInfo
-        main
+        page-header
+        
 </template>
 
 <script>
+import { PageHeader } from '@/components'
 export default {
-  
+    components: {
+        PageHeader
+    }
 }
 </script>
 
 <style lang="less" scoped>
-header {
-    height: 40px;
-    background-color: #eee;
-}
+
 </style>
