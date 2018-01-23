@@ -24,6 +24,7 @@ export default {
         //     console.log(msg)
         // },
         bens () {
+            
             this.$router.push('/home')
         }
     }
@@ -51,7 +52,6 @@ export default {
     }
     input::-webkit-input-placeholder{
         color: rgb(101, 123, 149);
-        opacity:1;
     }
 // input:-moz-placeholder { 
 // 　　color:#999;font-size:14px;

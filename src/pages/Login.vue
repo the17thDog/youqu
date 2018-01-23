@@ -7,7 +7,7 @@
                 .sign-header-slogan 旅游乐趣, &nbsp;历久弥新
             transition(name='sign')
                 .sign-inner
-                    sign-in.animated.swing(v-if="signType== 'signIn'")
+                    sign-in.animated.zoomInUp(v-if="signType== 'signIn'")
                     sign-up.animated.fadeIn(v-else)
             .sign-switch(@click='changeType') {{ type }}   
 </template>
