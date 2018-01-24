@@ -5,6 +5,7 @@
             .searchBar
                 input(placeholder='搜索你想去的景点')
             .userInfo
+
 </template>
 
 <script>
@@ -24,7 +25,7 @@ export default {
             div {
                 float: left;
                 height: 28px;
-                margin: 7px 0;
+                margin: 8px 0;
                 line-height: 30px;
                 text-align: center;
             }
@@ -37,7 +38,8 @@ export default {
             }
             .searchBar {
                 position: relative;
-                margin-left: 20%;;
+                margin-left: 20%;
+                transition: .5s;
                 input {
                     display: block;
                     background-color: #fff;
@@ -48,17 +50,17 @@ export default {
                     padding-left: 10px;
                     border: 1px solid #fff;
                     transition: .5s;
-                    
                 }
                 input:focus {
                     border: 1px solid #668aac;
                     box-shadow: 0 0 6px rgba(26,26,26,.1);
-                    width: 250px;
+                    width: 260px;
                     transition: .5s;
                 }
             }
             .searchBar:after {
                 content: '';
+                cursor: pointer;
                 position: absolute;
                 height: 20px;
                 width: 20px;
