@@ -38,22 +38,23 @@ export default {
             .searchBar {
                 position: relative;
                 margin-left: 20%;;
-                width: 200px;
                 input {
                     display: block;
                     background-color: #fff;
                     height: 100%;
-                    width: 100%;
+                    width: 180px;
                     font-size: 14px;
                     border-radius: 4px;
                     padding-left: 10px;
                     border: 1px solid #fff;
+                    transition: .5s;
+                    
                 }
                 input:focus {
-                    background-color: #eee;
                     border: 1px solid #668aac;
                     box-shadow: 0 0 6px rgba(26,26,26,.1);
-                    width: 300px;
+                    width: 250px;
+                    transition: .5s;
                 }
             }
             .searchBar:after {
