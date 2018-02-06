@@ -41,15 +41,13 @@ export default {
         SignIn,
         SignUp
     },
-    mounted () {
-        
+    mounted: () => {
+        console.log(1111)
     }
 }
 </script>
 
 <style lang="less" scoped>
-@import url(../styles/animated.less);
-
 .container {
     width: 1263px;
     height: 600px;

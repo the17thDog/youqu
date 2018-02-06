@@ -1,27 +1,48 @@
 <template lang="pug">
     .register-content
         .reg-tips 注册
-        form(method='post' accept-charset="UTF-8")
+        form(method='post' action='' accept-charset="UTF-8" @submit.prevent='')
+            //呢称 
             label.signup-nickname
                 input(type='text'
+                    v-model='nickname'
                     name='nickname'
-                    placeholder='呢称(1-6位), 限字母数字汉字'
-                    @blur='checkUsername'
-                    v-model='nickname')
-                .legal-tips
+                    autocomplete='off'
+                    placeholder='呢称(2-6位), 限字母数字汉字')
+                transition(name='tips')
+                    .legal-tips.iconfont(v-show='nickname!==""' :class='[ isLegalNickname? gou: cha ]')
+            //用户名
             label.signup-username
-                input(type='text' name='username' placeholder='用户名(3-9位), 仅限字母数字')
-                .legal-tips
-            label.signup-password
-                input(type='password' name='password' placeholder='密码(6-12位), 仅限字母数字')
-                .legal-tips
-            label.comfirm-pass
-                input(type='password' name='rePassword' placeholder='请重新输入密码')
-                .legal-tips
+                input(type='text'
+                    v-model='username'
+                    name='username'
+                    autocomplete='off'
+                    placeholder='用户名(3-9位), 仅限字母数字')
+                transition(name='tips')
+                    .legal-tips.iconfont(v-show='username!==""' :class='[ isLegalUsername? gou: cha ]')
+            //密码
+            label.signup-password  
+                input(type='password'
+                    v-model='password'
+                    name='password'
+                    placeholder='密码(6-12位), 字母数字结合')
+                transition(name='tips')
+                    .legal-tips.iconfont(v-show='password!==""' :class='[ isLegalPassword? gou: cha ]')
+            //确认密码
+            label.comfirm-pass  
+                input(type='password'
+                    v-model='rePassword'
+                    name='rePassword'
+                    placeholder='请重新输入密码')
+                transition(name='tips')
+                    .legal-tips.iconfont(v-show='rePassword!==""' :class='[ isLegalRePassword? gou: cha ]')
+            //提交
             label.signup-submit
                 input(type='submit' value='注册')
-        .err-tips.iconfont.icon-err
-            span() 你输入的格式有误，请检查
+
+        //注册失败的提示
+        .err-tips.iconfont.icon-err(v-show='true')
+            span 你输入的格式有误，请检查 !!!
 </template>
 
 <script>
@@ -31,23 +52,39 @@ export default {
             nickname: '',
             username: '',
             password: '',
-            rePassword: ''
+            rePassword: '',
+            gou: 'icon-gou',
+            cha: 'icon-cha'            
         }
     },
     methods: {
-        checkUsername () {
-            console.log(/^[\u4e00-\u9fa5a-zA-Z0-9]{1,6}$/.test(this.nickname))
-        }
+        // checkUsername () {  
+        //     console.log(/^[\u4e00-\u9fa5a-zA-Z0-9]{1,6}$/.test(this.nickname))
+        // }
+        // ss (e) {
+        //     e.preventDefault()
+        // }
     },
     computed: {
-        haha () {
+        isLegalNickname () {  //检验昵称是否合法
             return /^[\u4e00-\u9fa5a-zA-Z0-9]{1,6}$/.test(this.nickname)
+        },
+        isLegalUsername () {  //检查用户名是否合法
+            return /^[a-zA-Z0-9]{3,9}$/.test(this.username)
+        },
+        isLegalPassword () {  //检查密码是否合法
+            return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/.test(this.password)
+        },
+        isLegalRePassword () {  //检查重复密码是否合法
+            return this.password && this.rePassword === this.password
         }
     },
     mounted () {
-        console.log(this.bens)
-        console.log(this.gouzi)
+        console.log(this)
     }
+    // mounted: () => {
+    //     console.log(this)
+    // }
 }
 </script>
 
@@ -82,10 +119,19 @@ export default {
             .legal-tips {
                 height: 30px;
                 width: 30px;
-                background-color: #fff;
                 position: absolute;
                 left: 245px;
                 top:-30px;
+            }
+            .icon-gou {
+                font-size: 25px;
+                color: rgb(86, 163, 86)
+            }
+            .icon-cha {
+                font-size: 18px;
+                top: -25px;
+                left: 247px;
+                color: salmon;
             }
         }
         label:after {
@@ -141,13 +187,23 @@ export default {
         
     }
     .err-tips {
-        margin-top: 5px;
+        margin-top: 10px;
         height: 20px;
-        font-size: 12px;
+        font-size: 14px;
+        text-align: left;
         color: salmon;
         span {
             color: #000;
+            margin-left: 5px;
+            font-size: 12px;
+            color: #666;
         }
+    }
+    .tips-enter-active, .tips-leave-active {
+        transition: .3s;
+    }
+    .tips-enter, .tips-leave-to  {
+        opacity: 0;
     }
 }
 </style>

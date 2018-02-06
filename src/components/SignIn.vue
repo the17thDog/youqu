@@ -4,7 +4,7 @@
         form(method='post' accept-charset="UTF-8")
             input.sign-in-username(type='text' name='username' placeholder='请输入您的用户名')
             input.sign-in-password(type='password' name='password' placeholder='请输入您的密码')
-            .sign-in-submit(@click='bens') 登录
+            .sign-in-submit(@click='submitData') 登录
 </template>
 
 <script>
@@ -16,15 +16,15 @@ export default {
         }
     },
     methods: {
-        // async submitData() {
-        //     let msg = await this.$http.post('/api/', {
-        //         firstName: 'Fred',
-        //         lastName: 'Flintstone'
-        //     })
+        async submitData() {
+            let msg = await this.$http.post('/api/login', {
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            })
             
-        //     console.log(msg)
-        // },
-        bens () {
+            console.log(msg)
+        },
+        loginHomePage () {
             
             this.$router.push('/home')
         }

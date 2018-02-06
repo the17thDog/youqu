@@ -28,7 +28,7 @@ export default {
 		home: Home
 	},
 	mounted () {
-		
+		console.log(this)
 	}
 }
 </script>
