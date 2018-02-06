@@ -37,7 +37,6 @@ export default {
 .login-content {
     margin: 20px 0 0 0;
     padding: 10px 20px;
-    font-size: 0;
     form {
         position: relative;
         input {
