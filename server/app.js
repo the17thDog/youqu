@@ -1,18 +1,30 @@
 const Koa = require('koa2')
 const fs = require('fs')
-const router = require('./routes/')
+const koaBody = require('koa-body')
+const Router = require('koa-router')
 const loginFn = require('./routes/login')
 
 const app = new Koa()
+const router = new Router()
 
-router.post('/login', loginFn)
+app.use(koaBody())
+app
+.use(router.routes())
+.use(router.allowedMethods())
 
-app.use(async ctx => {
-  // let url = './www/' + ctx.url
-  // let data = await rFile(url)
-  // ctx.response.type = 'text/plain'
-  // ctx.body = data
+router.post('/reg', loginFn)
+
+router.post('/login', ctx => {
+    ctx.body = 'register'
 })
+
+// app.use(async ctx => {
+//   console.log(ctx.request.body)
+//   // let url = './www/' + ctx.url
+//   // let data = await rFile(url)
+//   // ctx.response.type = 'text/plain'
+//   ctx.body = 111
+// })
 
 app.listen(3000)
 

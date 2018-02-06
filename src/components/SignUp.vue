@@ -80,11 +80,8 @@ export default {
         }
     },
     mounted () {
-        console.log(this)
+        // console.log(this)
     }
-    // mounted: () => {
-    //     console.log(this)
-    // }
 }
 </script>
 

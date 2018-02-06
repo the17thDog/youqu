@@ -1,6 +1,6 @@
 <template lang="pug">
     .login-content
-        .login-tips 登录
+        .login-tips(@click='bens') 登录
         form(method='post' accept-charset="UTF-8")
             input.sign-in-username(type='text' name='username' placeholder='请输入您的用户名')
             input.sign-in-password(type='password' name='password' placeholder='请输入您的密码')
@@ -17,11 +17,17 @@ export default {
     },
     methods: {
         async submitData() {
-            let msg = await this.$http.post('/api/login', {
+            let msg = await this.$http.post('/api/reg', {
                 firstName: 'Fred',
                 lastName: 'Flintstone'
             })
             
+            console.log(msg)
+        },
+        async bens() {
+            let msg = await this.$http.post('/api/login', {
+                caoyi: 'gouzi'
+            })
             console.log(msg)
         },
         loginHomePage () {

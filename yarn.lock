@@ -75,7 +75,7 @@ amdefine@>=0.0.4:
 
 animate.css@^3.5.2:
   version "3.5.2"
-  resolved "http://r.cnpmjs.org/animate.css/download/animate.css-3.5.2.tgz#91e668dc069a808e5e499514867b97aae0166c36"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.5.2.tgz#91e668dc069a808e5e499514867b97aae0166c36"
 
 ansi-html@0.0.7:
   version "0.0.7"
