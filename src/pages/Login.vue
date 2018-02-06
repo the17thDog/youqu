@@ -11,7 +11,7 @@
             transition(name='sign')
                 .sign-inner
                     sign-in.animated.zoomInUp(v-if="signType== 'signIn'")
-                    sign-up.animated.fadeIn(v-else)
+                    sign-up.animated.fadeIn(v-else gouzi='bens' bens='gouzi')
                     .sign-switch 没有账号？
                         span(@click='changeType') {{ type }}
 </template>
@@ -41,15 +41,13 @@ export default {
         SignIn,
         SignUp
     },
-    mounted () {
-        
+    mounted: () => {
+        console.log(1111)
     }
 }
 </script>
 
 <style lang="less" scoped>
-@import url(../styles/animated.less);
-
 .container {
     width: 1263px;
     height: 600px;
@@ -100,13 +98,13 @@ export default {
             } 
         }
         .sign-inner {
-            background-color: #fff;
+            background-color: rgb(243, 240, 240);
             border-radius: 2px;
             .sign-switch {
                 text-align: center;
                 font-size: 14px;
                 height: 30px;
-                border-top: 1px solid #eee;
+                border-top: 1px solid #ddd;
                 line-height: 30px;
                 span {
                     color: #668aac;
