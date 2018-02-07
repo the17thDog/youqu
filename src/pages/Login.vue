@@ -2,8 +2,8 @@
     .container
         .cover
         .sign-tips
-            p 欢迎来到武陵源
-            p 你可以在武陵游趣上分享你弥足珍贵的回忆 !
+            //- p 欢迎来到武陵源
+            //- p 你可以在武陵游趣上分享你弥足珍贵的回忆 !
         .sign-container
             .sign-header     
                 h1.sign-header-logo  游趣

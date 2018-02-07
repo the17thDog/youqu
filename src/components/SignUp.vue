@@ -38,36 +38,43 @@
                     .legal-tips.iconfont(v-show='rePassword!==""' :class='[ isLegalRePassword? gou: cha ]')
             //提交
             label.signup-submit
-                input(type='submit' value='注册')
+                input(type='submit' value='注册' @click='subRegister')
 
         //注册失败的提示
-        .err-tips.iconfont.icon-err(v-show='true')
-            span 你输入的格式有误，请检查 !!!
+        .err-tips.iconfont.icon-err(v-show="errMsg !== ''")
+            span {{ errMsg }}
 </template>
 
 <script>
 export default {
     data () {
         return {
-            nickname: '',
-            username: '',
-            password: '',
-            rePassword: '',
+            nickname: '123',
+            username: 'gouzi',
+            password: 'Gouzi5844',
+            rePassword: 'Gouzi5844',
             gou: 'icon-gou',
-            cha: 'icon-cha'            
+            cha: 'icon-cha',
+            errMsg: ''            
         }
     },
     methods: {
-        // checkUsername () {  
-        //     console.log(/^[\u4e00-\u9fa5a-zA-Z0-9]{1,6}$/.test(this.nickname))
-        // }
-        // ss (e) {
-        //     e.preventDefault()
-        // }
+        async subRegister () {  //提交注册表单
+            if (!this.areAllLegal) {
+                this.errMsg = ' 你的输入不合法，请重新输入 !'
+                return
+            }
+            let retMsg = await this.$http.post('/api/reg', {  //后台返回值
+                nickname: this.nickname,
+                username: this.username,
+                password: this.password
+            })
+            console.log(retMsg)
+        }
     },
     computed: {
         isLegalNickname () {  //检验昵称是否合法
-            return /^[\u4e00-\u9fa5a-zA-Z0-9]{1,6}$/.test(this.nickname)
+            return /^[\u4e00-\u9fa5a-zA-Z0-9]{2,6}$/.test(this.nickname)
         },
         isLegalUsername () {  //检查用户名是否合法
             return /^[a-zA-Z0-9]{3,9}$/.test(this.username)
@@ -77,6 +84,9 @@ export default {
         },
         isLegalRePassword () {  //检查重复密码是否合法
             return this.password && this.rePassword === this.password
+        },
+        areAllLegal () { //检查表单是否全部合法
+            return this.isLegalNickname && this.isLegalUsername && this.isLegalPassword && this.isLegalRePassword
         }
     },
     mounted () {
@@ -97,6 +107,7 @@ export default {
         text-indent: 10%;
     }
     form {
+        margin-bottom: 10px;
         input {
             display: block;
             height: 30px;
@@ -193,7 +204,7 @@ export default {
             color: #000;
             margin-left: 5px;
             font-size: 12px;
-            color: #666;
+            color: #333;
         }
     }
     .tips-enter-active, .tips-leave-active {

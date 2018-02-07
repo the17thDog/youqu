@@ -22,13 +22,29 @@ export default {
 		//       console.log(e);
 		//     })
 		// }
+		async haha () {
+			var a = await Promise.reject(111)
+			return a;
+		},
+
+		sleep (x) {
+			return new Promise ((resolve, reject) => {
+				setTimeout(() => {
+					resolve(x)
+				}, 2000);
+			})
+		}
 	},
 	components: {
 		login: Login,
 		home: Home
 	},
-	mounted () {
-		console.log(this)
+	async mounted () {
+		var a =  this.sleep(20);
+		var b =  this.sleep(39)
+		console.log(a)
+		var c =  await a + await b;
+		console.log(c)
 	}
 }
 </script>
