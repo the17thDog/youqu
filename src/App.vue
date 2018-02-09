@@ -40,15 +40,12 @@ export default {
 		home: Home
 	},
 	mounted () {
-		// var a =  this.sleep(20);
-		// var b =  this.sleep(39)
-		// console.log(a)
-		// var c =  await a + await b;
-		// console.log(c)
+		console.log(eventBus)
 	}
 }
 </script>
 
 <style lang="less">
 @import url('./styles/base');
+@import url('//at.alicdn.com/t/font_552741_aq7n3ihaohe0cnmi.css');
 </style>

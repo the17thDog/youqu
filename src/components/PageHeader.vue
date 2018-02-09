@@ -4,8 +4,9 @@
             .logo 游趣
             .searchBar
                 input(placeholder='搜索你想去的景点')
-            .userInfo
-
+            .sign-container
+                .sign-up 注册
+                .sign-in 登陆
 </template>
 
 <script>
@@ -19,7 +20,7 @@ export default {
         width: 100%;
         background-color: #eee;
         .header-inner {
-            width: 1263px;
+            width: 1110px;
             height: 45px;
             margin: 0 auto;
             div {
@@ -38,7 +39,7 @@ export default {
             }
             .searchBar {
                 position: relative;
-                margin-left: 20%;
+                margin-left: 25%;
                 transition: .5s;
                 input {
                     display: block;
@@ -69,6 +70,9 @@ export default {
                 top: 5px;
                 background: url('../assets/svg/search.svg');
             }
+            .sign-container {
+                font-size: 16px;
+            }
         }
-    } 
+    }
 </style>

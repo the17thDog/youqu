@@ -1,10 +1,21 @@
 <template lang="pug">
     .login-content
-        .login-tips(@click='bens') 登录
+        .h2 登录
         form(method='post' accept-charset="UTF-8")
-            input.sign-in-username(type='text' name='username' placeholder='请输入您的用户名')
-            input.sign-in-password(type='password' name='password' placeholder='请输入您的密码')
+            input.sign-in-username(
+                type='text'
+                name='username'
+                placeholder='请输入您的用户名'
+                v-model='username')
+            input.sign-in-password(
+                type='password'
+                name='password'
+                placeholder='请输入您的密码'
+                v-model='password')
             .sign-in-submit(@click='submitData') 登录
+        //注册的提示
+        .login-tips.iconfont(v-show="loginMsg !== ''" :class="[ isSuccess? 'icon-success': 'icon-err']")
+            span {{ loginMsg }}
 </template>
 
 <script>
@@ -12,27 +23,47 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            loginMsg: '',
+            isSuccess: false //用来显示底部成功或失败的图标
+        }
+    },
+    computed: {
+        isInput () {  //判断表单是否有输入
+            return this.username !== '' && this.password !== ''
         }
     },
     methods: {
+        sleep (n) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve()
+                }, n);
+            })
+        },
         async submitData() {
-            let msg = await this.$http.post('/api/reg', {
-                firstName: 'Fred',
-                lastName: 'Flintstone'
+            if (!this.isInput) {
+                this.isSuccess = false
+                this.loginMsg = ' 用户名或密码不能为空!'
+                return
+            }
+            //后台返回的数据
+            let retMsg = await this.$http.post('/api/login', {  
+                username: this.username,
+                password: this.password
             })
-            
-            console.log(msg)
-        },
-        async bens() {
-            let msg = await this.$http.post('/api/login', {
-                caoyi: 'gouzi'
-            })
-            console.log(msg)
-        },
-        loginHomePage () {
-            
-            this.$router.push('/home')
+
+            if (retMsg.data.ok) {
+                await this.sleep(300)
+                this.isSuccess = true
+                this.loginMsg = ' 登陆成功!'
+                await this.sleep(700)
+                this.$router.push('/home')
+            }else {
+                await this.sleep(1000)
+                this.isSuccess = false
+                this.loginMsg = retMsg.data.msg
+            }
         }
     }
 }
@@ -40,7 +71,7 @@ export default {
 
 <style lang="less" scoped>
 .login-content {
-    margin: 20px 0px;
+    margin: 20px 0 0 0;
     padding: 10px 20px;
     form {
         position: relative;
@@ -50,8 +81,8 @@ export default {
         height: 30px;
         width: 100%;
         padding-left: 10px;
-        border-radius: 2px;
-        margin: 20px 0px;
+        border-radius: 3px;
+        margin: 15px 0px;
         border: 1px solid rgba(0, 0, 0, .2);
         font-size: 14px;
     }
@@ -80,11 +111,26 @@ export default {
     .sign-in-submit:hover {
         background-color: #668aac;
     }
-    .login-tips {
+    .h2 {
         text-align: left;
         font-size: 22px;
         font-weight: 500;
-        text-indent: 10%;
+    }
+    .login-tips {
+        margin-top: 10px;
+        margin-left: 10px;
+        height: 20px;
+        font-size: 16px;
+        text-align: left;
+        color: red;
+        span {
+            margin-left: 5px;
+            font-size: 14px;
+            color: #000;
+        }
+    }
+    .icon-success {
+        color: rgb(86, 163, 86)
     }
 }
 </style>

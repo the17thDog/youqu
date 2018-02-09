@@ -10,18 +10,21 @@
                 .sign-header-slogan 旅游乐趣, &nbsp;历久弥新
             transition(name='sign')
                 .sign-inner
-                    sign-in.animated.zoomInUp(v-if="signType== 'signIn'")
+                    //- loading
+                    sign-in.animated.fadeIn(
+                        v-if="signType== 'signIn'")
                     sign-up.animated.fadeIn(v-else gouzi='bens' bens='gouzi')
-                    .sign-switch 没有账号？
+                    .sign-switch {{ tipMsg }}
                         span(@click='changeType') {{ type }}
 </template>
 
 <script>
 
-import { SignIn, SignUp } from '@/components'
+import { SignIn, SignUp, Loading } from '@/components'
 export default {
     data () {
         return {
+            tipMsg: '没有账号？',
             signType: 'signIn',
             type: '注册'
         }
@@ -29,9 +32,11 @@ export default {
     methods: {
         changeType () {
             if (this.signType == 'signUp') {
+                this.tipMsg = '没有账号? '
                 this.signType = 'signIn'
                 this.type = '注册'
             }else {
+                this.tipMsg =  '已有账号? ',
                 this.signType = 'signUp'
                 this.type = '登录'
             }
@@ -39,17 +44,25 @@ export default {
     },
     components: {
         SignIn,
-        SignUp
+        SignUp,
+        Loading
     },
-    mounted: () => {
-        // console.log(1111)
+    created () {
+        eventBus.$on('toSignIn', () => {
+            this.tipMsg = '没有账号? '
+            this.signType = 'signIn'
+            this.type = '登录'
+        })
+    },
+    beforeDestroy () {
+        eventBus.$off('toSignIn')
     }
 }
 </script>
 
 <style lang="less" scoped>
 .container {
-    width: 1263px;
+    width: 1110px;
     height: 600px;
     position: relative;
     margin: 0 auto;
@@ -100,6 +113,7 @@ export default {
         .sign-inner {
             background-color: rgb(243, 240, 240);
             border-radius: 2px;
+            position: relative;
             .sign-switch {
                 text-align: center;
                 font-size: 14px;

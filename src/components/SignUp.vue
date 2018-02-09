@@ -1,6 +1,6 @@
 <template lang="pug">
     .register-content
-        .reg-tips 注册
+        h2 注册
         form(method='post' action='' accept-charset="UTF-8" @submit.prevent='')
             //呢称 
             label.signup-nickname
@@ -8,7 +8,7 @@
                     v-model='nickname'
                     name='nickname'
                     autocomplete='off'
-                    placeholder='呢称(2-6位), 限字母数字汉字')
+                    placeholder='呢称(2-12位), 限字母数字汉字')
                 transition(name='tips')
                     .legal-tips.iconfont(v-show='nickname!==""' :class='[ isLegalNickname? gou: cha ]')
             //用户名
@@ -17,7 +17,7 @@
                     v-model='username'
                     name='username'
                     autocomplete='off'
-                    placeholder='用户名(3-9位), 仅限字母数字')
+                    placeholder='用户名(6-16位), 仅限字母数字')
                 transition(name='tips')
                     .legal-tips.iconfont(v-show='username!==""' :class='[ isLegalUsername? gou: cha ]')
             //密码
@@ -40,44 +40,64 @@
             label.signup-submit
                 input(type='submit' value='注册' @click='subRegister')
 
-        //注册失败的提示
-        .err-tips.iconfont.icon-err(v-show="errMsg !== ''")
-            span {{ errMsg }}
+        //注册的提示
+        .reg-tips.iconfont(v-show="regMsg !== ''" :class="[ isSuccess? 'icon-success': 'icon-err']")
+            span {{ regMsg }}
 </template>
 
 <script>
 export default {
     data () {
         return {
-            nickname: '123',
-            username: 'gouzi',
-            password: 'Gouzi5844',
-            rePassword: 'Gouzi5844',
+            nickname: 'gouzi',
+            username: '17gouzi',
+            password: 'ggg111',
+            rePassword: 'ggg111',
             gou: 'icon-gou',
             cha: 'icon-cha',
-            errMsg: ''            
+            isSuccess: false,  //用来显示底部成功或失败的图标
+            regMsg: ''            
         }
     },
     methods: {
+        sleep (n) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve()
+                }, n);
+            })
+        },
         async subRegister () {  //提交注册表单
             if (!this.areAllLegal) {
-                this.errMsg = ' 你的输入不合法，请重新输入 !'
+                this.isSuccess = false
+                this.regMsg = ' 你的输入不合法，请重新输入 !'
                 return
             }
-            let retMsg = await this.$http.post('/api/reg', {  //后台返回值
+             //后台返回值
+            let retMsg = await this.$http.post('/api/reg', { 
                 nickname: this.nickname,
                 username: this.username,
                 password: this.password
             })
+            //判断是否注册成功
+            if (retMsg.data.ok) {  
+                this.isSuccess = true
+                this.regMsg = ' 注册成功 !'
+                await this.sleep(800)
+                eventBus.$emit('toSignIn')
+            } else {
+                this.isSuccess = false
+                this.regMsg = ' 用户名已被注册 !'
+            }
             console.log(retMsg)
         }
     },
     computed: {
         isLegalNickname () {  //检验昵称是否合法
-            return /^[\u4e00-\u9fa5a-zA-Z0-9]{2,6}$/.test(this.nickname)
+            return /^[\u4e00-\u9fa5a-zA-Z0-9]{2,12}$/.test(this.nickname)
         },
         isLegalUsername () {  //检查用户名是否合法
-            return /^[a-zA-Z0-9]{3,9}$/.test(this.username)
+            return /^[a-zA-Z0-9]{6,16}$/.test(this.username)
         },
         isLegalPassword () {  //检查密码是否合法
             return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/.test(this.password)
@@ -90,21 +110,19 @@ export default {
         }
     },
     mounted () {
-        // console.log(this)
+        console.log()
     }
 }
 </script>
 
 <style lang="less" scoped>
-@import url('//at.alicdn.com/t/font_552741_91e2h7co0vdt2o6r.css');
 .register-content {
     margin: 20px 0 0 0;
     padding: 10px 20px;
-    .reg-tips {
+    h2 {
         text-align: left;
         font-size: 22px;
         font-weight: 500;
-        text-indent: 10%;
     }
     form {
         margin-bottom: 10px;
@@ -113,8 +131,8 @@ export default {
             height: 30px;
             width: 92%;
             padding-left: 40px;
-            border-radius: 4px;
-            margin: 20px 0 0 0;
+            border-radius: 3px;
+            margin: 15px 0 0 0;
             border: 1px solid rgba(0, 0, 0, .2);
             font-size: 13px;
         }
@@ -194,18 +212,22 @@ export default {
         }
         
     }
-    .err-tips {
+    .reg-tips {
         margin-top: 10px;
+        margin-left: 10px;
         height: 20px;
-        font-size: 14px;
+        font-size: 16px;
         text-align: left;
-        color: salmon;
+        color: red;
         span {
             color: #000;
             margin-left: 5px;
-            font-size: 12px;
-            color: #333;
+            font-size: 14px;
+            color: #000;
         }
+    }
+    .icon-success {
+        color: rgb(86, 163, 86)
     }
     .tips-enter-active, .tips-leave-active {
         transition: .3s;
@@ -213,6 +235,7 @@ export default {
     .tips-enter, .tips-leave-to  {
         opacity: 0;
     }
+    
 }
 </style>
 
