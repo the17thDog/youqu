@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
+const commits_Schema = require('./commits')
 
-let users_Schema = new mongoose.Schema({ //用户的数据模型
+const users_Schema = new mongoose.Schema({ //用户的数据模型
     nickname: String,
     username: String,
-    password: String
+    password: String,
+    commit: [commits_Schema]
 })
-let User = mongoose.model('User', users_Schema)
 
-module.exports = User
+
+module.exports = users_Schema

@@ -47,11 +47,11 @@ export default {
         SignUp,
         Loading
     },
-    created () {
+    mounted () {
         eventBus.$on('toSignIn', () => {
             this.tipMsg = '没有账号? '
             this.signType = 'signIn'
-            this.type = '登录'
+            this.type = '注册'
         })
     },
     beforeDestroy () {

@@ -49,10 +49,10 @@
 export default {
     data () {
         return {
-            nickname: 'gouzi',
-            username: '17gouzi',
-            password: 'ggg111',
-            rePassword: 'ggg111',
+            nickname: '',
+            username: '',
+            password: '',
+            rePassword: '',
             gou: 'icon-gou',
             cha: 'icon-cha',
             isSuccess: false,  //用来显示底部成功或失败的图标

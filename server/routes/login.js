@@ -1,11 +1,14 @@
-const UserModel = require('../models/users')
+const mongoose = require('mongoose')
+const users_Schema = require('../models/users')
+
+let User = mongoose.model('User', users_Schema)
 
 module.exports = async ctx => {
     ctx.response.type = 'text/plain'
     let { username, password } = ctx.request.body
     let isSuccess = new Promise((resolve, reject) => {
-        UserModel.findOne({ username }, (err, doc) => {
-            if (err) reject(err)
+        User.findOne({ username }, (err, doc) => {
+            if (err) reject(errusers_Schema)
             resolve(doc)
         })
     })

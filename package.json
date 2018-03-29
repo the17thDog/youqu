@@ -12,6 +12,7 @@
   "dependencies": {
     "animate.css": "^3.5.2",
     "axios": "^0.17.1",
+    "cheerio": "^1.0.0-rc.2",
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
     "koa2": "^2.0.0-alpha.7",

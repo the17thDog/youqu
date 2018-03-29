@@ -3,9 +3,7 @@
 </template>
 
 <script>
-import Login from './pages/Login'
-import Home from './pages/Home'
-
+import { Login, Home, Scenic } from '@/pages'
 export default {
 	data() {
 		return {
@@ -40,12 +38,12 @@ export default {
 		home: Home
 	},
 	mounted () {
-		console.log(eventBus)
+		// console.log(eventBus)
 	}
 }
 </script>
 
 <style lang="less">
 @import url('./styles/base');
-@import url('//at.alicdn.com/t/font_552741_aq7n3ihaohe0cnmi.css');
+@import url('//at.alicdn.com/t/font_552741_4kx90nfeg0uj714i.css');
 </style>
