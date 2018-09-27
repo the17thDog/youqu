@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
-const commits_Schema = require('./commits')
 
 const attractions_Schema = new mongoose.Schema({
     name: String,
-    parise: Number,
+    id: String,
+    praise: Number,
     assessment: Number,
     badReview: Number,
-    info: String,
     pictrue: Array,
-    price: Number,
-    openTime: String,
-    commit: commits_Schema
+    summary: String
 })
+
+module.exports = attractions_Schema

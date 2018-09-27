@@ -3,10 +3,11 @@ import SignUp from './SignUp'
 import PageHeader from './PageHeader'
 import Loading from './Loading'
 import Slider from './Slider'
-import HotMsg from './HotMsg'
 import Attractions from './Attractions'
 import MsgBoard from './MsgBoard'
 import PageFooter from './PageFooter'
+import ScenicChart from './ScenicChart'
+import LeaveMsg from './LeaveMsg'
 
 export {
     SignIn,
@@ -14,8 +15,9 @@ export {
     PageHeader,
     Loading,
     Slider,
-    HotMsg,
     Attractions,
     MsgBoard,
-    PageFooter
+    PageFooter,
+    ScenicChart,
+    LeaveMsg
 }

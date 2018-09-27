@@ -45,5 +45,5 @@ export default {
 
 <style lang="less">
 @import url('./styles/base');
-@import url('//at.alicdn.com/t/font_552741_4kx90nfeg0uj714i.css');
+@import url('//at.alicdn.com/t/font_552741_te4n9ouobrtqpvi.css');
 </style>

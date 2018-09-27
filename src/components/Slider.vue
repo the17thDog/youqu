@@ -3,44 +3,50 @@
         .slider-photo(@mouseover="stop" @mouseout="go")
             ul
                 li.pic.animated(
-                    v-for="(item, index) in slideList"
+                    v-for="(item, index) in news_info"
+                    :key="index"
                     :class="[slideType]"
                     v-show="picIndex === index"
-                ) {{ item }}
+                )
+                    img(:src='item.image')
             //- 点击切换按钮
             .iconfont.icon-prev(@click="toPrevPic")
             .iconfont.icon-next(@click="toNextPic")
         .slider-info
-            h3.scenery-title 这是标题
-            .scenery-content.animated.flipInX(
-                v-for="(item, index) in infoList"
+            h3.scenery-title 简介
+            .scenery-content.animated(
+                v-for="(item, index) in news_info"
+                :key="index"
+                :class="[bounceType]"
                 v-show="index === picIndex"
-            ) {{ item }}
+            ) {{ item.title }}
 </template>
 
 <script>
 export default {
+    name: 'slider',
+    props: {
+        news_info: {
+            type: Array,
+            default () {
+                return []
+            }
+        },
+        news_length: Number
+    },
     data () {
         return {
-            slideList: [
-                1111111111111111111,
-                2222222222222222222,
-                3333333333333333333
-            ],
-            infoList: [
-                '丛林不摘下如何建造繁华丛林不摘下如何建造繁华丛林不摘下如何建造繁华丛林不摘下如何建造繁华',
-                '恬静时如水影, 跃动时如跃动时如火星跃动时如火星火星',
-                '剪影你的轮廓太好看, 凝跃动时如火星跃动时如火星住眼泪才敢细看'
-            ],
             picIndex: 0,
             slideType: '',
+            bounceType: '',
             timer: ''
         }
     },
     methods: {
         toPrevPic () {
-            let len = this.slideList.length
+            let len = this.news_length
             this.slideType = 'fadeInLeft'
+            this.bounceType = 'bounceInUp'
             this.picIndex --
             
             if (this.picIndex === -1) {
@@ -48,8 +54,9 @@ export default {
             }
         },
         toNextPic () {
-            let len = this.slideList.length
+            let len = this.news_length
             this.slideType = 'fadeInRight'
+            this.bounceType = 'bounceInDown'
             this.picIndex ++
 
             if(this.picIndex === len) {
@@ -57,7 +64,7 @@ export default {
             }
         },
         autoPlay () {
-            let len = this.slideList.length
+            let len = this.news_length
             this.slideType = 'fadeInRight'
             this.picIndex ++
 
@@ -76,9 +83,12 @@ export default {
             this.timer = null
         }
     },
-    async created () {
+    async mounted () {
         await this.$nextTick()   //  DOM更新后开启轮播图
         this.go()
+        setTimeout(() => {
+            console.log(this.news)
+        }, 1000);
     }
 }
 </script>
@@ -102,6 +112,10 @@ export default {
                 height: 300px;
                 li {
                     height: 300px;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
                 }
             }
             .icon-prev, .icon-next {
@@ -145,6 +159,7 @@ export default {
             .scenery-content {
                 padding: 20px;
                 font-size: 20px;
+                overflow: hidden;
             }
         }
     }

@@ -1,9 +1,13 @@
-const CHANGE_LOGIN_TIP = 'CHANGE_LOGIN_TIP'   //改变登录的提示
-const CHANGE_SIGN_TYPE = 'CHANGE_SIGN_TYPE'   //改变登录的类型
-const CHANGE_TIP_TYPE = 'CHANGE_TIP_TYPE'     //改变提示的类型
+const CHANGE_TYPE = 'CHANGE_TYPE'   //改变登录的状态
+const LOGIN = 'LOGIN'
+const REGISTER = 'REGISTER'
+const FETCH_USER_INFO = 'FETCH_USER_INFO'
+const LOGOUT = 'LOGOUT'
 
 export {
-    CHANGE_LOGIN_TIP,
-    CHANGE_SIGN_TYPE,
-    CHANGE_TIP_TYPE
+    CHANGE_TYPE,
+    LOGIN,
+    REGISTER,
+    FETCH_USER_INFO,
+    LOGOUT
 }

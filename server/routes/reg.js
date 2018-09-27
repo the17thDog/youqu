@@ -1,10 +1,7 @@
 const mongoose = require('mongoose')
 const users_Schema = require('../models/users')
-const commits_Schema = require('../models/commits')
-
 
 let User = mongoose.model('User', users_Schema)
-let Commit = mongoose.model('Commit', commits_Schema)
 
 module.exports = async ctx => {
     ctx.response.type = 'text/plain'
@@ -27,15 +24,8 @@ module.exports = async ctx => {
                 nickname,
                 username,
                 password,
-                commit: {}
             })
-
-            let commits = new Commit({
-                content: 'qweq',
-                person: 'gouzi'
-            })
-
-            commits.save()
+            
             users.save()
             ctx.body = { "ok": true, "msg": "注册成功" }
         } else {

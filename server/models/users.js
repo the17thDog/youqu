@@ -1,11 +1,22 @@
 const mongoose = require('mongoose')
-const commits_Schema = require('./commits')
 
 const users_Schema = new mongoose.Schema({ //用户的数据模型
     nickname: String,
     username: String,
     password: String,
-    commit: [commits_Schema]
+    userpic: {
+        type: String,
+        default: '../../static/user.jpg'
+    },
+    
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    likeList: {
+        type: Array,
+        default: []
+    }
 })
 
 

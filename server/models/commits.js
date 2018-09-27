@@ -2,16 +2,25 @@ const mongoose = require('mongoose')
 
 const commits_Schema = new mongoose.Schema({ //评论
     content: {
-        type: String,
-        default: '没有评论'  
+        type: String
     },
     date: {
         type: Date,
         default: Date.now()
     },
-    scenic: String,
-    person: String,
-    imgs: Array
+    score: Number,
+    u_id: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
+    s_id: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Attraction'
+    },
+    like: {
+        type: Number,
+        default: 0
+    }
 })
 
 module.exports = commits_Schema

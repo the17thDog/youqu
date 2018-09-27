@@ -57,7 +57,7 @@ export default {
                 await this.sleep(300)
                 this.isSuccess = true
                 this.loginMsg = ' 登陆成功!'
-                await this.sleep(700)
+                await this.sleep(1000)
                 this.$router.push('/home')
             }else {
                 await this.sleep(1000)

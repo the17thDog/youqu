@@ -2,8 +2,8 @@
     .container
         .cover
         .sign-tips
-            //- p 欢迎来到武陵源
-            //- p 你可以在武陵游趣上分享你弥足珍贵的回忆 !
+            p 欢迎来到武陵源
+            p 你可以在武陵游趣上分享你弥足珍贵的回忆 !
         .sign-container
             .sign-header     
                 h1.sign-header-logo  游趣
@@ -11,35 +11,30 @@
             transition(name='sign')
                 .sign-inner
                     //- loading
-                    sign-in.animated.fadeIn(
-                        v-if="signType== 'signIn'")
-                    sign-up.animated.fadeIn(v-else gouzi='bens' bens='gouzi')
-                    .sign-switch {{ tipMsg }}
-                        span(@click='changeType') {{ type }}
+                    sign-in.animated.fadeIn(v-if="signInfo.signType === 'signIn'")
+                    sign-up.animated.fadeIn(v-else)
+                    .sign-switch {{ signInfo.loginTip }}
+                        span(@click='changeType') {{ signInfo.tipType }}
 </template>
 
 <script>
 
 import { SignIn, SignUp, Loading } from '@/components'
+import { mapState } from 'vuex'
 export default {
     data () {
         return {
-            tipMsg: '没有账号？',
-            signType: 'signIn',
-            type: '注册'
+
         }
+    },
+    computed: {
+        ...mapState([
+            'signInfo'
+        ])
     },
     methods: {
         changeType () {
-            if (this.signType == 'signUp') {
-                this.tipMsg = '没有账号? '
-                this.signType = 'signIn'
-                this.type = '注册'
-            }else {
-                this.tipMsg =  '已有账号? ',
-                this.signType = 'signUp'
-                this.type = '登录'
-            }
+            this.$store.dispatch('changeType')
         }
     },
     components: {
@@ -48,14 +43,7 @@ export default {
         Loading
     },
     mounted () {
-        eventBus.$on('toSignIn', () => {
-            this.tipMsg = '没有账号? '
-            this.signType = 'signIn'
-            this.type = '注册'
-        })
-    },
-    beforeDestroy () {
-        eventBus.$off('toSignIn')
+        console.log(this.signInfo)
     }
 }
 </script>
@@ -68,9 +56,9 @@ export default {
     margin: 0 auto;
    .cover {
         position: fixed;
-        background-color: rgba(0, 0, 0, .5);
         height: 100%;
         width: 100%;
+        background: url('../../static/bg.jpg');
         top: 0;
         left: 0;
         // background: url('https://static.zhihu.com/heifetz/bg.8ca8122d44fc9a0f7b04.png');
@@ -107,7 +95,7 @@ export default {
             .sign-header-slogan {
                 margin-top: 5px;
                 font-size: 16px;
-                color: rgb(59, 122, 77)
+                color: rgb(59, 122, 77);
             } 
         }
         .sign-inner {
@@ -123,6 +111,7 @@ export default {
                 span {
                     color: #668aac;
                     cursor: pointer;
+                    margin-left: 5px;
                 }
                 span:hover {
                     color: #666;

@@ -1,9 +1,8 @@
-const loginTip = state => state.loginTip
-const signType = state => state.signType
-const tipType = state => state.tipType
+const u_id = state => state.userInfo.u_id
+const si = state => state.signInfo.signType
+// console.log(state)
 
 export default {
-    loginTip,
-    signType,
-    tipType
+    u_id,
+    si
 }

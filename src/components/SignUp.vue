@@ -84,7 +84,7 @@ export default {
                 this.isSuccess = true
                 this.regMsg = ' 注册成功 !'
                 await this.sleep(800)
-                eventBus.$emit('toSignIn')
+                this.$store.dispatch('changeType')
             } else {
                 this.isSuccess = false
                 this.regMsg = ' 用户名已被注册 !'
